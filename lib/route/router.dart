@@ -3,6 +3,7 @@ import 'package:go_route_v7/screen/2_named_screen.dart';
 import 'package:go_route_v7/screen/3_push_screen.dart';
 import 'package:go_route_v7/screen/4_pop_base_screen.dart';
 import 'package:go_route_v7/screen/5_pop_return_screen.dart';
+import 'package:go_route_v7/screen/6_path_param_screen.dart';
 import 'package:go_route_v7/screen/root_screen.dart';
 import 'package:go_router/go_router.dart';
 
@@ -36,18 +37,31 @@ final router = GoRouter(
           },
         ),
         GoRoute(
-            path: 'pop',
+          path: 'pop',
+          builder: (context, state) {
+            return PopBaseScreen();
+          },
+          routes: [
+            GoRoute(
+              path: 'return',
+              builder: (context, state) {
+                return PopReturnScreen();
+              },
+            )
+          ],
+        ),
+        GoRoute(
+            path: 'path_param/:id',
             builder: (context, state) {
-              return PopBaseScreen();
+              return PathParamScreen();
             },
             routes: [
               GoRoute(
-                path: 'return',
-                builder: (context, state) {
-                  return PopReturnScreen();
-                },
-              )
-            ])
+                  path: ':name',
+                  builder: (context, state) {
+                    return PathParamScreen();
+                  })
+            ]),
       ],
     ),
   ],
