@@ -16,6 +16,7 @@ class RootScreen extends StatelessWidget {
             },
             child: Text('Go Basic'),
           ),
+          SizedBox(height: 8.0,),
           ElevatedButton(
             onPressed: () {
               context.goNamed('named_screen');
@@ -24,6 +25,13 @@ class RootScreen extends StatelessWidget {
               // 이렇게 간단하게 이름으로 이동할 수 있다.
             },
             child: Text('Go Named'),
+          ),
+          SizedBox(height: 8.0,),
+          ElevatedButton(
+            onPressed: () {
+              context.go('/push');
+            },
+            child: Text('Go Push'),
           ),
         ],
       ),
