@@ -16,6 +16,15 @@ class RootScreen extends StatelessWidget {
             },
             child: Text('Go Basic'),
           ),
+          ElevatedButton(
+            onPressed: () {
+              context.goNamed('named_screen');
+              // go>>> /1234/123/46/1/34/51/2341/73/45/1234/1234/
+              // goNamed >> /long_screen
+              // 이렇게 간단하게 이름으로 이동할 수 있다.
+            },
+            child: Text('Go Named'),
+          ),
         ],
       ),
     );
