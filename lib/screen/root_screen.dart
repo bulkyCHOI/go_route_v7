@@ -33,6 +33,13 @@ class RootScreen extends StatelessWidget {
             },
             child: Text('Go Push'),
           ),
+          SizedBox(height: 8.0,),
+          ElevatedButton(
+            onPressed: () {
+              context.go('/pop');
+            },
+            child: Text('Go Pop'),
+          ),
         ],
       ),
     );
