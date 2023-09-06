@@ -178,4 +178,5 @@ final router = GoRouter(
   errorBuilder: (context, state) => ErrorScreen(
     error: state.error.toString(),
   ),
+  debugLogDiagnostics: true,
 );
