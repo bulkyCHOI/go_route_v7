@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+
+//body 부분에 들어갈 위젯
 class NestedChildScreen extends StatelessWidget {
   final String routeName;
 

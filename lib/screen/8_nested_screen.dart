@@ -19,7 +19,6 @@ class NestedScreen extends StatelessWidget {
     }else{
       return 0;
     }
-
   }
 
   @override

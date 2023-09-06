@@ -74,29 +74,32 @@ final router = GoRouter(
           },
         ),
         ShellRoute(
-            builder: (context, state, child) {
-              return NestedScreen(child: child);
-            },
-            routes: [
-              GoRoute(
-                path: 'nested/a',
-                builder: (_, state) => NestedChildScreen(
-                  routeName: '/nested/a',
-                ),
+          //하위 child 위젯을 인자로 받음으로써, NestedScreen 안에 body안에서 사용할수 있도록 만들어져 있다.
+          //shell처럼 child를 한번 감싸주는 형태를 띄게 된다.
+          builder: (context, state, child) {
+            return NestedScreen(child: child);
+          },
+          routes: [
+            GoRoute(
+              path: 'nested/a',
+              builder: (_, state) => NestedChildScreen(
+                routeName: '/nested/a',
               ),
-              GoRoute(
-                path: 'nested/b',
-                builder: (_, state) => NestedChildScreen(
-                  routeName: '/nested/b',
-                ),
+            ),
+            GoRoute(
+              path: 'nested/b',
+              builder: (_, state) => NestedChildScreen(
+                routeName: '/nested/b',
               ),
-              GoRoute(
-                path: 'nested/c',
-                builder: (_, state) => NestedChildScreen(
-                  routeName: '/nested/c',
-                ),
+            ),
+            GoRoute(
+              path: 'nested/c',
+              builder: (_, state) => NestedChildScreen(
+                routeName: '/nested/c',
               ),
-            ])
+            ),
+          ],
+        )
       ],
     ),
   ],
