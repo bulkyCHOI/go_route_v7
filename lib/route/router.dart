@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:go_route_v7/screen/1_basic_screen.dart';
 import 'package:go_route_v7/screen/2_named_screen.dart';
 import 'package:go_route_v7/screen/3_push_screen.dart';
@@ -10,6 +11,8 @@ import 'package:go_route_v7/screen/8_nested_screen.dart';
 import 'package:go_route_v7/screen/9_login_screen.dart';
 import 'package:go_route_v7/screen/9_private_screen.dart';
 import 'package:go_route_v7/screen/root_screen.dart';
+import 'package:go_route_v7/screen/10_transition_screen_1.dart';
+import 'package:go_route_v7/screen/10_transition_screen_2.dart';
 import 'package:go_router/go_router.dart';
 
 //로그인 여부
@@ -17,15 +20,14 @@ bool authState = false;
 
 // https://blog.codefactory.ai/ -> / = path
 final router = GoRouter(
-  redirect: (context, state){
+  redirect: (context, state) {
     // return string (path) -> 해당 라우트로 이동한다.(path)
     // return null -> 원래 이동하려던 라우트로 이동한다.
-    if(state.location == '/login/private' && !authState ) {
+    if (state.location == '/login/private' && !authState) {
       return '/login';
     }
     return null;
   },
-
   routes: [
     GoRoute(
       path: '/',
@@ -129,16 +131,44 @@ final router = GoRouter(
           builder: (_, state) => LoginScreen(),
           routes: [
             GoRoute(
-              path: 'private',
-              builder: (_, state) => PrivateScreen(),
-              redirect: (context, state){
-                // state.location을 조건처리 할필요가 없다. 이 라우트 안에서만 실행되므로
-                if(!authState){
-                  return '/login2';
-                }
-                return null;
-              }
-            )
+                path: 'private',
+                builder: (_, state) => PrivateScreen(),
+                redirect: (context, state) {
+                  // state.location을 조건처리 할필요가 없다. 이 라우트 안에서만 실행되므로
+                  if (!authState) {
+                    return '/login2';
+                  }
+                  return null;
+                }),
+          ],
+        ),
+        GoRoute(
+          path: 'transition',
+          builder: (_, state) => TransitionScreenOne(),
+          routes: [
+            GoRoute(
+              path: 'detail',
+              pageBuilder: (_, state) => CustomTransitionPage(
+                child: TransitionScreenTwo(),
+                transitionDuration: Duration(seconds: 3),
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) {
+                  // return FadeTransition(
+                  //   opacity: animation,
+                  //   child: child,
+                  // );
+                  // return ScaleTransition(
+                  //   scale: animation,
+                  //   child: child,
+                  // );
+                  return RotationTransition(
+                    turns: animation,
+                    child: child,
+                  );
+                },
+              ),
+              //builder: (_, state) => TransitionScreenTwo(),
+            ),
           ],
         )
       ],
