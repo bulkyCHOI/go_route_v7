@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:go_route_v7/screen/11_error_screen.dart';
 import 'package:go_route_v7/screen/1_basic_screen.dart';
 import 'package:go_route_v7/screen/2_named_screen.dart';
 import 'package:go_route_v7/screen/3_push_screen.dart';
@@ -174,4 +175,7 @@ final router = GoRouter(
       ],
     ),
   ],
+  errorBuilder: (context, state) => ErrorScreen(
+    error: state.error.toString(),
+  ),
 );
